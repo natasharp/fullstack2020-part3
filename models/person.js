@@ -4,7 +4,7 @@ mongoose.set('useFindAndModify', false)
 
 
 const url = process.env.MONGODB_URI
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .catch((error) => {
         console.log('error connecting to MongoDB:', error.message)
     })
