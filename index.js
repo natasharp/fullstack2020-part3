@@ -76,22 +76,32 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
 app.put('/api/persons/:id', (request, response, next) => {
     const body = request.body
+    if (body.number && body.number.length > 8) {
 
-    const person = {
-        name: body.name,
-        number: body.number,
+        const person = {
+            name: body.name,
+            number: body.number,
+        }
+
+        Person.findByIdAndUpdate(request.params.id, person, { new: true })
+            .then(updatedPerson => {
+                response.json(updatedPerson.toJSON())
+            })
+            .catch(error => next(error))
     }
-
-    Person.findByIdAndUpdate(request.params.id, person, { new: true })
-        .then(updatedPerson => {
-            response.json(updatedPerson.toJSON())
-        })
-        .catch(error => next(error))
+    else if (!body.number) {
+        response.status(400)
+            .send({ error: 'Number is required.' })
+    }
+    else {
+        response.status(400)
+            .send({ error: `Number ${body.number} (${body.number.length}) is shorter than the minimum allowed length (8).` })
+    }
 })
 
 const unknownEndpoint = (request, response) => {
     response.status(404)
-        .send({ error: 'unknown endpoint' })
+        .send({ error: 'Unknown endpoint' })
 }
 
 app.use(unknownEndpoint)
@@ -100,7 +110,7 @@ const errorHandler = (error, request, response, next) => {
     console.error(error.message)
     if (error.name === 'CastError') {
         return response.status(400)
-            .send({ error: 'malformatted id' })
+            .send({ error: 'Malformatted id' })
     } else if (error.name === 'ValidationError') {
         return response.status(400)
             .send({ error: error.message })
