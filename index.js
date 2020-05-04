@@ -76,7 +76,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 
 app.put('/api/persons/:id', (request, response, next) => {
     const body = request.body
-    if (body.number && body.number.length > 8) {
+    if (body.number && body.number.length > 7) {
 
         const person = {
             name: body.name,
