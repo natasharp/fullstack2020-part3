@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const password = process.argv[2]
-personName = process.argv[3]
-personPhone = process.argv[4]
+const personName = process.argv[3]
+const personPhone = process.argv[4]
 
 const url = `mongodb+srv://fullstack:${password}@cluster0-ionyk.mongodb.net/phonebook-app?retryWrites=true`
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,7 +20,7 @@ const person = new Person({
 
 if (process.argv.length > 3) {
     person.save().then(result => {
-        console.log(`added ${personName} number ${personPhone} 040-1234556 to phonebook`)
+        console.log(`added ${result.name} number ${result.number} to phonebook`)
         mongoose.connection.close()
     })
 } else {
@@ -32,6 +32,3 @@ if (process.argv.length > 3) {
         mongoose.connection.close()
     })
 }
-
-
-

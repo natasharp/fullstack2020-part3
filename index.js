@@ -39,8 +39,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.get('/info', (request, response) => {
     Person.find({}).then(persons => {
-        numberOfPerson = persons.length
-        const info = `<div>Phonebook has info of ${numberOfPerson} people 
+        const info = `<div>Phonebook has info of ${persons.length} people 
                     <br/>
                     <br/>${Date().toLocaleString()}<div>`
         response.send(info)
