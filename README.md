@@ -2,7 +2,7 @@
 
 This repository contains exercise solutions for part 3 of the [Full Stack Open 2020](https://fullstackopen.com/en) course from the University of Helsinki.
 
-## Part 3 - [Typescript](https://fullstackopen.com/en/part3)
+## Part 3 - [Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
 Part 3 covers creating and deploying REST API in Node.js using Express library and document MongoDB database for saving data. 
 This repository contains REST API for manipulating and fetching data about contacts for the phonebook React app from part2.
 The phonebook app deployed with Heroku is available [here](https://radiant-dawn-17502.herokuapp.com/).
